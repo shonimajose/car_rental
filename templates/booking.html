@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="container">
+    <table class="table table-bordered table-stripped bg-primary text-dark text-center text">
+        <tr>
+            <th>Car Name</th>
+            <th>Days</th>
+            <th>Rent</th>
+            <th>totalRent</th>
+            <th>Booker Name</th>
+            <th>Image</th>
+            <th>Status</th>
+
+        </tr>
+        {% for item in items %}
+        {% if item.user == request.user %}
+
+        <tr>
+        <td>{{item.book.car.Car_Name}}</td>
+        <td>{{item.book.numberofdays}}</td>
+        <td>{{item.book.car.Car_Rent}}/per day</td>
+        <td>{{item.TotalRent}}</td>
+        <td>{{item.book.Booker_Name}}</td>
+        <td><img src="{{item.book.car.Car_Image.url}}" style="height: 70px; width:auto;" alt=""></td>
+        {% if item.paymentstatus == False %}
+        <td><h3 style="color: red;">Payment pending</h3></td>
+        
+        {% else %}
+            {% if item.cancel == True %}
+             <td><h3 style="color: antiquewhite;">Order Cancelled</h3></td>
+            {% else %}
+            <td><a class="btn btn-danger" href="{% url 'cancel' item.id %}">cancel</a></td>
+            {% endif %}
+        
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    
+        </tr>
+        
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    .viewproduct{
+        width: 70%;
+        height: 400px;
+        border:2px solid blueviolet;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+
+    }
+    .viewproduct h1{
+        padding: 5px;
+        margin-top: 10px;
+        text-decoration: underline;
+    }
+    .viewproduct h4{
+        padding: 5px;
+        margin-top: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    .viewproduct .img{
+        padding: 5px;
+        margin-top: 50px;
+        margin-left: 30px;
+    }
+    .viewproduct a{
+        margin-left:29%;
+        margin-top: 50px;
+        
+    }
+   
+</style>
+<div class="container">
+
+    <div class="viewproduct">
+      {% for item in product %}
+      <div class="row">
+        <div class="col-md-6">
+            <div class="img">
+                <img src="{{item.car.Car_Image.url}}" style="width: 280px;height: 280px;" alt="">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="detais">
+                <h1>{{item.car.Car_Name}}</h1>
+                <h4>Rent :<b> {{item.car.Car_Rent}}/-</b></h4>
+                <h4>number  of days :<b> {{item.numberofdays}}</b></h4>
+                <h4><b>Booker_Name : </b> {{item.Booker_Name}}</h4>
+                <h4><b>Address : </b> {{item.Address}}</h4>
+                <h4><b>Amount to be payed : </b> {{rent}}</h4>
+                <a class="btn btn-warning" href="{%url 'Placeorder' pk  %}">continue</a>
+
+
+
+            </div>
+        </div>
+      
+      {% endfor %}
+        
+        
+    </div>
+</div>
+
+
+{% endblock  %}

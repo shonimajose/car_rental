@@ -1,0 +1,87 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+<style>
+    .updateproduct{
+        width: 80%;
+        height:auto;
+        border: 5px solid rgb(79, 39, 172);
+        padding:20px;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 20px;
+        border-radius: 10px;
+
+
+    }
+    .updateproduct h3{
+       font-size: 25px;
+        color: black;
+        text-decoration: underline;
+        text-align: center;
+    }
+    .updateproduct input{
+        color: black;
+        width: 100%;
+        padding: 5px;
+        border: .5 solid rgb(133, 110, 110);
+        border-radius: 5px;
+    }
+    .updateproduct label{
+        color: black;
+    }
+
+</style>
+<div class="container">
+    <div class="updateproduct mt-5">
+        {% for message in messages %}
+        <h4 style="color:aqua">{{message}}</h4>
+        {% endfor %}
+        <h3>Update car</h3>
+        {% for item in car %}
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <table class="table">
+        
+
+                    <tr>
+                        <th><label for="">Car Name</label></th>
+                        <td><input type="text" name="pname" value="{{item.Car_Name}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Car Brand </label></th>
+                        <td><input type="text" name="pbrand" value="{{item.Car_Brand}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Car Discription </label></th>
+                        <td><input type="text" name="pdis" value="{{item.Car_Discription}}"></td>
+                    </tr>
+                 
+                  
+                    <tr>
+                        <th><label for="">Car Rent</label></th>
+                        <td><input type="text" name="pprice" value="{{item.Car_Rent}}"></td>
+                    </tr>
+                    <tr>
+                        <th><label for="">Car Image</label></th>
+                        <td><input type="file" name="img" required></td>
+                    </tr>
+                   
+                    
+
+                </table>
+            </div>
+            <div class="col-md-6">
+              <img src="{{item.Car_Image.url}}" style="width: 80%;height: 80%;" alt="">
+              <button type="submit" class="btn btn-warning">Update</button>
+            </div>
+        </form>
+
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock  %}

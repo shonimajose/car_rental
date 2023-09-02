@@ -1,0 +1,51 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+
+<div class="container">
+    {% for message in messages %}
+    <h4 style="color:red">{{message}}</h4>
+    {% endfor %}
+    <table class="table table-bordered table-stripped bg-primary     text-dark text-center text">
+        <tr>
+            <th>Car Name</th>
+            <th>Image</th>
+            <th>Days</th>
+            <th>Rent</th>
+            <th>totalRent</th>
+            <th>Booker Name</th>
+            <th>User_Id </th>
+            <th>Address </th>
+            <th>ID_Proof</th>
+            <th>Status</th>
+
+        </tr>
+        {% for item in items %}
+        {% if item.book.car.Owner == request.user %}
+        <tr>
+        <td>{{item.book.car.Car_Name}}</td>
+        <td><img src="{{item.book.car.Car_Image.url}}" style="height: 70px; width:auto;" alt=""></td>
+        <td>{{item.book.numberofdays}}</td>
+        <td>{{item.book.car.Car_Rent}}/per day</td>
+        <td>{{item.TotalRent}}</td>
+        <td>{{item.book.Booker_Name}}</td>
+        <td>{{item.user}}</td>
+        <td>{{item.book.Address}}</td>
+        <td><a href="{%url 'IdProof' item.book.id %}"><img src="{{item.book.Id_Proof.url}}" style="height: 70px; width:auto;" alt=""></a></td>
+        {% if item.cancel == True %}
+            <td><h3 style="color: antiquewhite;">Order Cancelled</h3></td>
+        {% else %}
+            {% if item.paymentstatus == False %}
+            <td><h3 style="color: red;">Payment pending</h3></td>
+            
+            {% else %}
+            <td><h3 style="color: green;">Payment Done</h3></td>
+
+            
+            {% endif %}
+        </tr>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

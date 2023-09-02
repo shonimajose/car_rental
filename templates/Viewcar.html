@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    .viewproduct{
+        width: 70%;
+        height: 400px;
+        border:2px solid blueviolet;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+
+    }
+    .viewproduct h1{
+        padding: 5px;
+        margin-top: 10px;
+        text-decoration: underline;
+    }
+    .viewproduct h4{
+        padding: 5px;
+        margin-top: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    .viewproduct .img{
+        padding: 5px;
+        margin-top: 50px;
+        margin-left: 30px;
+    }
+    .viewproduct a{
+        margin-left:29%;
+        margin-top: 90px;
+        
+    }
+   
+</style>
+<div class="container">
+
+    <div class="viewproduct">
+      {% for item in product %}
+      <div class="row">
+        <div class="col-md-6">
+            <div class="img">
+                <img src="{{item.Car_Image.url}}" style="width:300px;height: 250px;" alt="">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="detais">
+                <h1>{{item.Car_Name}}</h1>
+                <h4>Price :<b> RS: {{item.Car_Rent}}/ per day</b></h4>
+                <h4>Brand :<b> {{item.Car_Brand}}</b></h4>
+                <h4><b>Discription : </b> {{item.Car_Discription}}</h4>
+                <a class="btn btn-warning" href="{%url 'BookNow' item.CarId  %}">Book Now</a>
+
+
+    
+            </div>
+        </div>
+      
+      {% endfor %}
+        
+        
+    </div>
+</div>
+
+{% endblock  %}

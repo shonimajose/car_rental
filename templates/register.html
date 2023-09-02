@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<style>
+    .inputcontainer{
+        
+        
+        text-align: center;
+
+    }
+    .inputcontainer input{
+        padding: 5px;
+        border-radius: 10px;
+
+
+    }
+    .inputcontainer input:hover{
+        background-color: bisque;
+
+    }
+    .inputcontainer button{
+        width:100px;
+        border-radius: 10px;
+        background-color: #82e9e4;
+        color: rgb(6, 7, 7);
+        font-size: 15px;
+    }
+    .inputcontainer h2{
+        font-size: 50px;
+    }
+    .inputcontainer button:hover{
+        background-color: rgb(31, 140, 234);
+        color: rgb(0, 0, 0);
+    }
+
+
+</style>
+
+<section class="banner_main">
+    <div class="container">
+        {% for message in messages %}
+        <h4 style="color:red">{{message}}</h4>
+        {% endfor %}
+      
+            <div class="inputcontainer">
+                <h2 style="color:antiquewhite">Register</h2>
+              <form method ="post">
+                {% csrf_token %}
+                 {% for  field in form  %}
+                 <h4 style="color: whitesmoke;">{{field.label}}:</h4>
+                 {{field}}<br><br>
+
+                 {% endfor %}
+                <button type="submit">Register</button>
+              </form>
+             </div>
+             
+         
+    </div>
+ </section>
+{% endblock %}

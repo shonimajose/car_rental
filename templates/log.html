@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<style>
+    .inputcontainer{
+        width: auto;
+        height: 400px;
+        margin: auto;
+        margin-top: 5%;
+        /* border: 1px solid black; */
+        /* background-color:aliceblue; */
+        text-align: center;
+
+    }
+    .inputcontainer h1{
+        font-size: 50px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+
+
+</style>
+
+<section >
+    <div class="container">
+            <div class="inputcontainer">
+                {% for message in messages %}
+                <h4 style="color:red">{{message}}</h4>
+                {% endfor %}
+              <form method="post">
+
+                {% if check == False %}
+                <h1>verify your  account</h1>
+
+                {% else %}
+                <h1> your  account has been verified</h1>
+
+                <p>click here to </p><a class="btn btn-info" href="{% url 'SignIn'  %}">Login</a>
+                
+                {% endif %}
+                
+              </form>
+            </div>
+            
+    </div>
+ </section>
+{% endblock  %}

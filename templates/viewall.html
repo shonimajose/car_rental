@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+.contactus{
+   
+   width: 250px;
+   
+}
+</style>
+<div  class="car">
+    <div class="container">
+
+       <div class="row">
+          <div class="col-md-12">
+             <div class="titlepage">
+               <form >
+                  <input class="contactus" placeholder="Search" type="Search" name="Search">                                                                  
+                  <button class="btn" type="submit">Find Now</button><br><br>
+                </form>
+             </div>
+          </div>
+       </div>
+       
+       <div class="row">
+          
+       {% for item in product %}
+       
+          <div class="col-md-4 padding_leri">
+             <div class="car_box">
+                <figure><img src="{{item.Car_Image.url}}" style="height: 150px;width: 200px;" alt="#"/></figure>
+                <h3 style="border:1px solid black;"><a href="{% url 'ViewCar' item.CarId %}">{{item.Car_Name}} ${{item.Car_Rent}}</a></h3>
+
+             </div>
+          </div>
+          {% endfor %}
+    
+          </div>
+       </div>
+    </div>
+ </div>
+{% endblock %}

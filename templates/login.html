@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<style>
+    .container{
+        margin-top: 0%;
+    }
+    .inputcontainer{
+        margin-left: 200px;
+        width: 300px;
+        height: 300px;
+        margin: auto;
+        margin-top: 5%;
+         /* border: 1px solid blue;  */
+        /* background-color:aliceblue; */
+        text-align: center;
+
+    }
+    .inputcontainer input{
+        padding: 5px;
+        border-radius: 10px;
+
+
+    }
+    .inputcontainer input:hover{
+        background-color: bisque;
+
+    }
+    .inputcontainer button{
+        width: 60px;
+        border-radius: 10px;
+        background-color: #183661;
+        color: aliceblue;
+        font-size: 15px;
+    }
+    .inputcontainer h1{
+        font-size: 50px;
+    }
+    .inputcontainer button:hover{
+        background-color: rgb(31, 140, 234);
+        color: rgb(0, 0, 0);
+    }
+
+
+</style>
+
+<section class="">
+    <div class="container">
+       
+            <div class="inputcontainer">
+                {% for message in messages %}
+                <h4 style="color:red">{{message}}</h4>
+                {% endfor %}
+              <form method="post">
+                {% csrf_token %}
+                <h1>Login</h1><br>
+                <input type="text" name="uname" placeholder="username"><br><br>
+                <input type="password" name="pswd" placeholder="password"><br><br>
+                <button type="submit">Login</button><br>
+                <a href="{% url 'SignUp' %}">resister now</a>
+              </form>
+            </div>
+             
+          
+    </div>
+ </section>
+{% endblock  %}

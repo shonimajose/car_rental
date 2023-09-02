@@ -1,0 +1,35 @@
+{% extends 'admin/adminhome.html' %}
+{% block content %}
+
+<div class="container">
+    {% for message in messages %}
+    
+    <h4 style="color:red">{{message}}</h4>
+    {% endfor %}
+    <table class="table table-bordered table-stripped bg-info text-dark text-center text">
+        <tr>
+            <th>Car Name</th>
+            <th>Rent</th>
+            <th>Brand</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        {% for item in items %}
+        {% if item.Owner == request.user %}
+        <tr>
+        <td>{{item.Car_Name}}</td>
+        <td>{{item.Car_Rent}}/per day</td>
+        <td>{{item.Car_Brand}}</td>
+        <td><img src="{{item.Car_Image.url}}" style="height: 70px; width:auto;" alt=""></td>
+        <td>
+            <form action="{%url 'UpdateCar' item.CarId %}">
+            <button type="submit" class="btn btn-warning">Update</button>
+            </form>
+            <a href="{%url 'DeleteCar' item.CarId %}" class="btn btn-danger">Delete</a>
+        </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    .viewproduct{
+        width: 70%;
+        height: 400px;
+        border:2px solid blueviolet;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px;
+
+    }
+    .viewproduct h1{
+        padding: 5px;
+        margin-top: 10px;
+        text-decoration: underline;
+    }
+    .viewproduct h4{
+        padding: 5px;
+        margin-top: 10px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    .viewproduct .img{
+        padding: 5px;
+        margin-top: 50px;
+        margin-left: 30px;
+    }
+    .viewproduct button{
+        margin-left:29%;
+        margin-top: 50px;
+        
+    }
+   
+</style>
+<div class="container">
+
+    <div class="viewproduct">
+      {% for item in product %}
+      <div class="row">
+        <div class="col-md-6">
+            <div class="img">
+                <img src="{{item.car.Car_Image.url}}" style="width: 280px;height: 280px;" alt="">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="detais">
+                <h1>{{item.car.Car_Name}}</h1>
+                <h4>Rent :<b> {{item.car.Car_Rent}}/-</b></h4>
+                <h4>number  of days :<b> {{item.numberofdays}}</b></h4>
+                <h4><b>Booker_Name : </b> {{item.Booker_Name}}</h4>
+                <h4><b>Address : </b> {{item.Address}}</h4>
+                <h4><b>Amount to be payed : </b> {{total}}</h4>
+                <button id="pay-btn" class="btn btn-warning">Pay {{total}}</button>
+
+
+    
+            </div>
+        </div>
+      
+      {% endfor %}
+        
+        
+    </div>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        // Enter the Key ID generated from the Dashboard
+        key: "{{ razorpay_merchant_key }}",
+        // Amount is in currency subunits.
+        // Default currency is INR. Hence,
+        // 50000 refers to 50000 paise
+        amount: "{{ razorpay_amount }}",
+        currency: "{{ currency }}",
+        // Your/store name.
+        name: "payment_integr",
+        // Pass the `id` obtained in the response of Step 1
+        order_id: "{{ razorpay_order_id }}",
+        callback_url: "{{ callback_url }}",
+    };
+    // initialise razorpay with the options.
+    var rzp1 = new Razorpay(options);
+    // add event listener to the payment button.
+    document.getElementById("pay-btn").onclick = function(e) {
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>
+{% endblock  %}
